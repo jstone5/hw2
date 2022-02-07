@@ -69,6 +69,9 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
+Movies.destroy_all
+People.destroy_all
+Roles.destroy_all
 
 # Generate models and tables, according to the domain model
 # TODO!
@@ -76,6 +79,10 @@
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
 # TODO!
+
+values = { name: "Apple Inc.", url: "https://www.apple.com", city: "Cupertino", state: "CA" }
+new_movie = Movies.new(values)
+new_movie.save
 
 # Prints a header for the movies output
 puts "Movies"

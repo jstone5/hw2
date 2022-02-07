@@ -1,2 +1,2 @@
-class Movie < ApplicationRecord
+class Movies < ApplicationRecord
 end
