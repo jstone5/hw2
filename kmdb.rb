@@ -69,20 +69,156 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
+puts "--- Script Begins Here ---"
 Movies.destroy_all
 People.destroy_all
 Roles.destroy_all
 
 # Generate models and tables, according to the domain model
 # TODO!
+# (Models created in the schema.rb file.)
 
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
+# Create movie data
 values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: 1 }
 new_movie = Movies.new(values)
 new_movie.save
+
+values = { title: "The Dark Knight", year_released: "2008", rated: "PG-13", person_id: 1 }
+new_movie = Movies.new(values)
+new_movie.save
+
+values = { title: "The Dark Knight Rises", year_released: "2012", rated: "PG-13", person_id: 1 }
+new_movie = Movies.new(values)
+new_movie.save
+
+puts "There are currently #{Movies.all.count} movies in the database."
+
+batman_begins = Movies.where({ title: "Batman Begins" })[0]
+the_dark_knight = Movies.where({ title: "The Dark Knight" })[0]
+the_dark_knight_rises = Movies.where({ title: "The Dark Knight Rises" })[0]
+
+# Create person data
+values = { name: "Christopher Nolan" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Christian Bale" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Michael Caine" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Liam Neeson" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Katie Holmes" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Gary Oldman" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Heath Ledger" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Aaron Eckhart" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Maggie Gyllenhaal" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Tom Hardy" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Joseph Gordon-Levitt" }
+new_person = People.new(values)
+new_person.save
+
+values = { name: "Anne Hathaway" }
+new_person = People.new(values)
+new_person.save
+
+puts "There are currently #{People.all.count} people in the database."
+
+
+# Create roles data
+
+#Batman Begins Roles
+values = { movie_id: batman_begins.id, person_id: People.where({ name: "Christian Bale" })[0].id, character_name: "Bruce Wayne" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: batman_begins.id, person_id: People.where({ name: "Michael Caine" })[0].id, character_name: "Alfred" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: batman_begins.id, person_id: People.where({ name: "Liam Neeson" })[0].id, character_name: "Ra's Al Ghul" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: batman_begins.id, person_id: People.where({ name: "Katie Holmes" })[0].id, character_name: "Rachel Dawes" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: batman_begins.id, person_id: People.where({ name: "Gary Oldman" })[0].id, character_name: "Commissioner Gordon" }
+new_role = Roles.new(values)
+new_role.save
+
+# The Dark Knight Roles
+values = { movie_id: the_dark_knight.id, person_id: People.where({ name: "Christian Bale" })[0].id, character_name: "Bruce Wayne" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight.id, person_id: People.where({ name: "Heath Ledger" })[0].id, character_name: "Joker" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight.id, person_id: People.where({ name: "Aaron Eckhart" })[0].id, character_name: "Harvey Dent" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight.id, person_id: People.where({ name: "Michael Caine" })[0].id, character_name: "Alfred" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight.id, person_id: People.where({ name: "Maggie Gyllenhaal" })[0].id, character_name: "Rachel Dawes" }
+new_role = Roles.new(values)
+new_role.save
+
+# The Dark Knight Rises Roles
+values = { movie_id: the_dark_knight_rises.id, person_id: People.where({ name: "Christian Bale" })[0].id, character_name: "Bruce Wayne" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight_rises.id, person_id: People.where({ name: "Gary Oldman" })[0].id, character_name: "Commissioner Gordon" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight_rises.id, person_id: People.where({ name: "Tom Hardy" })[0].id, character_name: "Bane" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight_rises.id, person_id: People.where({ name: "Joseph Gordon-Levitt" })[0].id, character_name: "John Blake" }
+new_role = Roles.new(values)
+new_role.save
+
+values = { movie_id: the_dark_knight_rises.id, person_id: People.where({ name: "Anne Hathaway" })[0].id, character_name: "Selina Kyle" }
+new_role = Roles.new(values)
+new_role.save
+
+puts "There are currently #{Roles.all.count} roles in the database."
 
 # Prints a header for the movies output
 puts "Movies"
@@ -92,7 +228,6 @@ puts ""
 # Query the movies data and loop through the results to display the movies output
 # TODO!
 
-p Movies.all.count
 
 # Prints a header for the cast output
 puts ""

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_031449) do
 
     create_table "roles", force: :cascade do |t|
       t.string "movie_id"
-      t.string "person_Id"
+      t.string "person_id"
       t.string "character_name"
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
