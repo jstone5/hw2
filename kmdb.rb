@@ -84,25 +84,6 @@ Roles.destroy_all
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
-# Create movie data
-values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: 1 }
-new_movie = Movies.new(values)
-new_movie.save
-
-values = { title: "The Dark Knight", year_released: "2008", rated: "PG-13", person_id: 1 }
-new_movie = Movies.new(values)
-new_movie.save
-
-values = { title: "The Dark Knight Rises", year_released: "2012", rated: "PG-13", person_id: 1 }
-new_movie = Movies.new(values)
-new_movie.save
-
-puts "There are currently #{Movies.all.count} movies in the database."
-
-batman_begins = Movies.where({ title: "Batman Begins" })[0]
-the_dark_knight = Movies.where({ title: "The Dark Knight" })[0]
-the_dark_knight_rises = Movies.where({ title: "The Dark Knight Rises" })[0]
-
 # Create person data
 values = { name: "Christopher Nolan" }
 new_person = People.new(values)
@@ -153,6 +134,27 @@ new_person = People.new(values)
 new_person.save
 
 puts "There are currently #{People.all.count} people in the database."
+
+
+# Create movie data
+values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: People.where({ name: "Christopher Nolan" })[0].id }
+new_movie = Movies.new(values)
+new_movie.save
+
+values = { title: "The Dark Knight", year_released: "2008", rated: "PG-13", person_id: People.where({ name: "Christopher Nolan" })[0].id }
+new_movie = Movies.new(values)
+new_movie.save
+
+values = { title: "The Dark Knight Rises", year_released: "2012", rated: "PG-13", person_id: People.where({ name: "Christopher Nolan" })[0].id }
+new_movie = Movies.new(values)
+new_movie.save
+
+puts "There are currently #{Movies.all.count} movies in the database."
+
+batman_begins = Movies.where({ title: "Batman Begins" })[0]
+the_dark_knight = Movies.where({ title: "The Dark Knight" })[0]
+the_dark_knight_rises = Movies.where({ title: "The Dark Knight Rises" })[0]
+
 
 
 # Create roles data
@@ -234,15 +236,16 @@ puts ""
 # Create variables to make naming conventions in loop code easier
 movies = Movies.all
 people = People.all
-director = People.where(name: "Christopher Nolan")[0]
 roles = Roles.all
 movie_counter = 0
 role_counter = 0
 else_counter = 0
 
+# Use for loop to output all movies in the database
 for movie in movies
+    specific_director = People.where(id: movie.person_id)[0]
     movie_counter += 1
-    puts "Movie ##{movie_counter}: #{movie.title}  #{movie.year_released}  #{movie.rated}  #{director.name}"
+    puts "Movie ##{movie_counter}: #{movie.title}  #{movie.year_released}  #{movie.rated}  #{specific_director.name}"
 end
 
 
