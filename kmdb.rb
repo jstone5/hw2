@@ -228,10 +228,16 @@ puts ""
 # Query the movies data and loop through the results to display the movies output
 # TODO!
 
+# Create variables to make naming conventions in loop code easier
 movies = Movies.all
+people = People.all
+director = People.where(name: "Christopher Nolan")[0]
+roles = Roles.all
+role_counter = 0
+else_counter = 0
 
 for movie in movies
-    puts "#{movie.title}  #{movie.year_released}  #{movie.rated}  #{movie.director}"
+    puts "#{movie.title}  #{movie.year_released}  #{movie.rated}  #{director.name}"
 end
 
 
@@ -241,5 +247,15 @@ puts "Top Cast"
 puts "========"
 puts ""
 
+
+
 # Query the cast data and loop through the results to display the cast output for each movie
 # TODO!
+
+# Attempt #2 -- Single for loop with "where" clauses for actors and movies
+for role in roles
+    specific_actor = People.where(id: role.person_id)[0]
+    specific_movie = Movies.where(id: role.movie_id)[0]
+    role_counter += 1
+    puts "Role ##{role_counter}:  #{specific_movie.title}  #{specific_actor.name}  #{role.character_name}"
+end
