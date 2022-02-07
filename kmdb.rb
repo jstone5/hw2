@@ -80,7 +80,7 @@ Roles.destroy_all
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
-values = { name: "Apple Inc.", url: "https://www.apple.com", city: "Cupertino", state: "CA" }
+values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: 1 }
 new_movie = Movies.new(values)
 new_movie.save
 
@@ -91,6 +91,8 @@ puts ""
 
 # Query the movies data and loop through the results to display the movies output
 # TODO!
+
+p Movies.all.count
 
 # Prints a header for the cast output
 puts ""
