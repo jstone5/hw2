@@ -69,7 +69,9 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
+puts ""
 puts "--- Script Begins Here ---"
+puts ""
 Movies.destroy_all
 People.destroy_all
 Roles.destroy_all
@@ -219,6 +221,7 @@ new_role = Roles.new(values)
 new_role.save
 
 puts "There are currently #{Roles.all.count} roles in the database."
+puts ""
 
 # Prints a header for the movies output
 puts "Movies"
@@ -233,11 +236,13 @@ movies = Movies.all
 people = People.all
 director = People.where(name: "Christopher Nolan")[0]
 roles = Roles.all
+movie_counter = 0
 role_counter = 0
 else_counter = 0
 
 for movie in movies
-    puts "#{movie.title}  #{movie.year_released}  #{movie.rated}  #{director.name}"
+    movie_counter += 1
+    puts "Movie ##{movie_counter}: #{movie.title}  #{movie.year_released}  #{movie.rated}  #{director.name}"
 end
 
 
@@ -252,10 +257,10 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie
 # TODO!
 
-# Attempt #2 -- Single for loop with "where" clauses for actors and movies
+# Single "for" loop with "where" clauses to pull in the correct movie name and actor name for each role.
 for role in roles
     specific_actor = People.where(id: role.person_id)[0]
     specific_movie = Movies.where(id: role.movie_id)[0]
     role_counter += 1
-    puts "Role ##{role_counter}:  #{specific_movie.title}  #{specific_actor.name}  #{role.character_name}"
+    puts "Role ##{role_counter}:\t#{specific_movie.title}  #{specific_actor.name}  #{role.character_name}"
 end
